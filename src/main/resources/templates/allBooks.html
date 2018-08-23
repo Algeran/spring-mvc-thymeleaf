@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all books</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/library.css" th:href="@{css/library.css}">
+</head>
+<body>
+<h1>Books:</h1>
+
+<table class="books">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Name</th>
+        <th>PublishDate</th>
+        <th>Authors</th>
+        <th>Genre</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book, stat : ${books}" th:object="${book}">
+        <td th:text="${stat.index + 1}">1</td>
+        <td th:text="*{name}">BookName</td>
+        <td th:text="${#dates.format(book.publishedDate, 'dd.MM.yyyy')}">01.01.2000</td>
+        <td th:text="${book.getAuthorsString()}">author</td>
+        <td th:text="*{genre?.name}">fantasy</td>
+        <td>
+            <a href="editBook.html" th:href="@{/editBook(id=*{id})}">Edit</a>
+        </td>
+        <form id="delete-form" action="allBooks.html" th:action="@{/deleteBook(id=*{id})}" th:method="delete">
+            <td>
+                <button type="submit">Delete</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<a href="index.html" th:href="@{/}">Back to main</a>
+<br/>
+<a href="createBook.html" th:href="@{/createBook}">Create book</a>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all genres</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/library.css" th:href="@{css/library.css}">
+</head>
+<body>
+<h1>Genres:</h1>
+
+<table class="genres">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Name</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="genre, stat : ${genres}" th:object="${genre}">
+        <form id="edit-form" action="allGenres.html" th:action="@{/editGenre(id=*{id})}" th:method="post">
+            <td th:text="${stat.index + 1}">1</td>
+            <td>
+                <input title="genre-name-input" name="namer" type="text" value="genre" th:value="*{name}"/>
+            </td>
+            <td>
+                <button type="submit">Edit</button>
+            </td>
+        </form>
+        <form id="delete-form" action="allGenres.html" th:action="@{/deleteGenre(id=*{id})}" th:method="delete">
+            <td>
+                <button type="submit">Delete</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+<a href="index.html" th:href="@{/}">Back to main</a>
+<br/>
+<a href="createGenre.html" th:href="@{/createGenre}">Create genre</a>
+</body>
+</html>

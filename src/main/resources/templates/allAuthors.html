@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all authors</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/library.css" th:href="@{css/library.css}">
+</head>
+<body>
+<h1>Authors:</h1>
+
+<table class="authors">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Country</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author, stat : ${authors}" th:object="${author}">
+        <form id="edit-form" action="allAuthors.html" th:action="@{/editAuthor(id=*{id})}" th:method="post">
+            <td th:text="${stat.index + 1}">1</td>
+            <td>
+                <input title="author-name-input" name="namer" type="text" value="John" th:value="*{name}"/>
+            </td>
+            <td>
+                <input title="author-surname-input" name="surnamer" type="text" value="Doe" th:value="*{surname}"/>
+            </td>
+            <td th:text="*{country}">RUSSIA</td>
+            <td>
+                <button type="submit">Edit</button>
+            </td>
+        </form>
+        <form id="delete-form" action="allAuthors.html" th:action="@{/deleteAuthor(id=*{id})}" th:method="delete">
+            <td>
+                <button type="submit">Delete</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<a href="index.html" th:href="@{/}">Back to main</a>
+<br/>
+<a href="createAuthor.html" th:href="@{/createAuthor}">Create author</a>
+</body>
+</html>

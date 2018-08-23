@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit book</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/library.css" th:href="@{css/library.css}">
+</head>
+<body>
+<form id="edit-form" action="editBook.html" th:action="@{/editBook}" th:method="post" th:object="${book}">
+    <h1>Book Info:</h1>
+
+    <input type="hidden" name="id" th:value="*{id}">
+    <input type="hidden" name="ageYears" th:value="*{ageYears}">
+
+    <div class="row">
+        <label for="name-input">Name: </label>
+        <input id="name-input" type="text" th:field="*{name}" th:value="*{name}" value="Book name"/>
+    </div>
+
+    <div class="row">
+        <label for="date-input">Published date: </label>
+        <input id="date-input" type="date" th:field="*{publishedDate}" th:value="*{#dates.format(publishedDate,'yyyy-MM-dd')}" value="01.01.2000"/>
+    </div>
+
+    <div class="box">
+        <label for="authors-input">Authors: </label>
+        <select id="authors-input" th:field="*{authors}" size="5" multiple="multiple">
+            <option th:each="author : ${authors}"
+                    th:value="${author.id}"
+                    th:text="${author.getNameAndSurname()}">
+                Some Author
+            </option>
+        </select>
+    </div>
+
+    <div class="box">
+        <label for="genre-input">Genre: </label>
+        <select id="genre-input" th:field="*{genre}">
+            <option th:each="genre : ${genres}"
+                    th:value="${genre.id}"
+                    th:text="${genre.name}">
+                Some Author
+            </option>
+        </select>
+    </div>
+
+    <div class="row">
+        <button type="submit">Save</button>
+    </div>
+</form>
+<a href="index.html" th:href="@{/}">Back to main</a>
+<br/>
+<a href="allBooks.html" th:href="@{/books}">Back to all books</a>
+</body>
+</html>
