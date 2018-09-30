@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all comments</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/library.css" th:href="@{css/library.css}">
+</head>
+<body>
+<h1>Comments:</h1>
+
+<table class="comments">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>Username</th>
+        <th>Comment</th>
+        <th>Books</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="comment, stat : ${comments}" th:object="${comment}">
+        <td th:text="${stat.index + 1}">1</td>
+        <td th:text="*{username}">Username</td>
+        <td th:text="*{comment}">Some commentary</td>
+        <td th:text="*{getBooksString()}">book(genre)</td>
+        <td>
+            <a href="editComment.html" th:href="@{/editComment(id=*{id})}">Edit</a>
+        </td>
+        <form id="delete-form" action="allComments.html" th:action="@{/deleteComment(id=*{id})}" th:method="delete">
+            <td>
+                <button type="submit">Delete</button>
+            </td>
+        </form>
+    </tr>
+    </tbody>
+</table>
+
+<br/>
+
+<a href="index.html" th:href="@{/}">Back to main</a>
+<br/>
+<a href="createComment.html" th:href="@{/createComment}">Create comment</a>
+</body>
+</html>

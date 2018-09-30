@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/library.css" th:href="@{css/library.css}">
+</head>
+<body>
+<h1>Welcome to our little library!</h1>
+
+<table class="common-library">
+    <thead>
+    <tr>
+        <th>Element</th>
+        <th>Count</th>
+        <th>Create</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <a href="allGenres.html" th:href="@{/genres}">Genres</a>
+        </td>
+        <td th:text="${genres}">1</td>
+        <td>
+            <a href="createGenre.html" th:href="@{/createGenre}">Create genre</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="allBooks.html" th:href="@{/books}">Books</a>
+        </td>
+        <td th:text="${books}">1</td>
+        <td>
+            <a href="createBook.html" th:href="@{/createBook}">Create book</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="allAuthors.html" th:href="@{/authors}">Authors</a>
+        </td>
+        <td th:text="${authors}">1</td>
+        <td>
+            <a href="createAuthor.html" th:href="@{/createAuthor}">Create author</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="allComments.html" th:href="@{/comments}">Comments</a>
+        </td>
+        <td th:text="${comments}">1</td>
+        <td>
+            <a href="createComment.html" th:href="@{/createComment}">Create comment</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
